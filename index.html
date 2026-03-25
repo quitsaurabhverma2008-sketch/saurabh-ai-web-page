@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saurabh AI - The Future of AI Conversation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Three.js Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Particle Overlay -->
+    <div id="particles" class="particles-container"></div>
+    
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <svg viewBox="0 0 100 100" class="logo-svg">
+                    <defs>
+                        <linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" class="grad-1"/>
+                            <stop offset="50%" class="grad-2"/>
+                            <stop offset="100%" class="grad-3"/>
+                        </linearGradient>
+                        <filter id="loaderGlow">
+                            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <polygon points="50,5 95,85 5,85" fill="none" stroke="url(#loaderGrad)" stroke-width="2" filter="url(#loaderGlow)"/>
+                    <circle cx="50" cy="55" r="18" fill="none" stroke="url(#loaderGrad)" stroke-width="2"/>
+                    <circle cx="50" cy="55" r="8" fill="url(#loaderGrad)" class="pulse-circle"/>
+                </svg>
+            </div>
+            <div class="loader-text">
+                <span class="loading">Loading</span>
+                <span class="dots">
+                    <span class="dot">.</span>
+                    <span class="dot">.</span>
+                    <span class="dot">.</span>
+                </span>
+            </div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" data-hover>
+                <svg viewBox="0 0 100 100" class="nav-logo-svg">
+                    <defs>
+                        <linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" class="grad-1"/>
+                            <stop offset="50%" class="grad-2"/>
+                            <stop offset="100%" class="grad-3"/>
+                        </linearGradient>
+                    </defs>
+                    <polygon points="50,5 95,85 5,85" fill="none" stroke="url(#navGrad)" stroke-width="3"/>
+                    <circle cx="50" cy="55" r="18" fill="none" stroke="url(#navGrad)" stroke-width="2"/>
+                    <circle cx="50" cy="55" r="8" fill="url(#navGrad)"/>
+                </svg>
+                <span class="logo-text">SAURABH AI</span>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link" data-hover>Home</a></li>
+                <li><a href="#features" class="nav-link" data-hover>Features</a></li>
+                <li><a href="#models" class="nav-link" data-hover>Models</a></li>
+                <li><a href="#modes" class="nav-link" data-hover>Modes</a></li>
+                <li><a href="#tech" class="nav-link" data-hover>Tech</a></li>
+                <li><a href="#demo" class="nav-link" data-hover>Demo</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <a href="https://github.com/quitsaurabhverma2008-sketch" target="_blank" class="nav-github" data-hover>
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <button class="theme-toggle" id="themeToggle" data-hover>
+                    <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" data-hover>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge" data-animate="fade-up">
+                <span class="badge-icon">
+                    <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </span>
+                <span>12 Next-Gen AI Models</span>
+            </div>
+            
+            <h1 class="hero-title" data-animate="fade-up" data-delay="100">
+                <span class="title-line">THE FUTURE OF</span>
+                <span class="title-gradient">AI CONVERSATION</span>
+            </h1>
+            
+            <p class="hero-subtitle" data-animate="fade-up" data-delay="200">
+                Experience the next evolution in artificial intelligence with 
+                <span class="highlight">12 powerful models</span>, 
+                <span class="highlight">8 specialized modes</span>, and 
+                <span class="highlight">persistent memory</span>.
+            </p>
+            
+            <div class="hero-cta" data-animate="fade-up" data-delay="300">
+                <a href="https://github.com/quitsaurabhverma2008-sketch/Saurabh-ai" target="_blank" class="btn btn-primary" data-hover>
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span>Star on GitHub</span>
+                </a>
+                <a href="#features" class="btn btn-secondary" data-hover>
+                    <span>Explore Features</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+            
+            <div class="hero-stats" data-animate="fade-up" data-delay="400">
+                <div class="stat" data-count="12">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">AI Models</span>
+                </div>
+                <div class="stat" data-count="8">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Chat Modes</span>
+                </div>
+                <div class="stat" data-count="50">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Languages</span>
+                </div>
+                <div class="stat" data-count="100">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Free</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-visual" data-animate="fade-left" data-delay="200">
+            <div class="floating-card">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="ai-orb">
+                        <div class="orb-layer orb-1"></div>
+                        <div class="orb-layer orb-2"></div>
+                        <div class="orb-layer orb-3"></div>
+                        <div class="orb-core">
+                            <svg viewBox="0 0 100 100">
+                                <polygon points="50,5 95,85 5,85" fill="none" stroke="#fff" stroke-width="2"/>
+                                <circle cx="50" cy="55" r="18" fill="none" stroke="#fff" stroke-width="2"/>
+                                <circle cx="50" cy="55" r="8" fill="#fff"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring delay-1"></div>
+                    <div class="pulse-ring delay-2"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator" data-animate="fade-up" data-delay="500">
+            <span>Scroll to explore</span>
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-tag">FEATURES</span>
+            <h2 class="section-title">Built for the <span class="gradient-text">Next Generation</span></h2>
+            <p class="section-subtitle">Cutting-edge technology meets intuitive design</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="0">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4c0 1.1-.45 2.1-1.17 2.83L15 9h2a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2h-1v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2H5a2 2 0 0 1-2-2v-1a3 3 0 0 1 3-3h2l.17-.17A4 4 0 0 1 12 2z"/></svg>
+                </div>
+                <h3>12 AI Models</h3>
+                <p>Access Gemini, Grok, Mistral, DeepSeek, Claude, ChatGPT, and more in one unified interface.</p>
+                <div class="feature-glow"></div>
+            </div>
+            
+            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="100">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01"/></svg>
+                </div>
+                <h3>Persistent Memory</h3>
+                <p>Your conversations are stored locally, creating a personalized experience that remembers everything.</p>
+                <div class="feature-glow"></div>
+            </div>
+            
+            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="200">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <h3>Lightning Fast</h3>
+                <p>Optimized FastAPI backend with streaming support for real-time, instant responses.</p>
+                <div class="feature-glow"></div>
+            </div>
+            
+            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="300">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <h3>8 Chat Modes</h3>
+                <p>Specialized modes for coding, research, creative writing, math, translation, and more.</p>
+                <div class="feature-glow"></div>
+            </div>
+            
+            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="400">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+                </div>
+                <h3>Code Support</h3>
+                <p>Syntax highlighting, code copying, and language-specific assistance for developers.</p>
+                <div class="feature-glow"></div>
+            </div>
+            
+            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="500">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>Privacy First</h3>
+                <p>Your data stays on your device. No tracking, no collection. Complete privacy guaranteed.</p>
+                <div class="feature-glow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Models Section -->
+    <section id="models" class="models">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-tag">AI MODELS</span>
+            <h2 class="section-title">Power of <span class="gradient-text">12 Models</span></h2>
+            <p class="section-subtitle">The best AI providers, unified in one interface</p>
+        </div>
+        
+        <div class="models-carousel">
+            <div class="models-track" id="modelsTrack">
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #4285f4, #34a853);">G</div>
+                    <h4>Gemini</h4>
+                    <p>Google AI</p>
+                    <div class="model-status online"></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">X</div>
+                    <h4>Grok</h4>
+                    <p>xAI</p>
+                    <div class="model-status online"></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #f97316, #ef4444);">M</div>
+                    <h4>Mistral</h4>
+                    <p>Mistral AI</p>
+                    <div class="model-status online"></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #06b6d4, #10b981);">D</div>
+                    <h4>DeepSeek</h4>
+                    <p>DeepSeek AI</p>
+                    <div class="model-status online"></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">C</div>
+                    <h4>Claude</h4>
+                    <p>Anthropic</p>
+                    <div class="model-status online"></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #22c55e, #14b8a6);">O</div>
+                    <h4>ChatGPT</h4>
+                    <p>OpenAI</p>
+                    <div class="model-status online"></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">Q</div>
+                    <h4>Groq</h4>
+                    <p>Groq AI</p>
+                    <div class="model-status online"></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">C</div>
+                    <h4>Cohere</h4>
+                    <p>Cohere AI</p>
+                    <div class="model-status online"></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">T</div>
+                    <h4>Together</h4>
+                    <p>Together AI</p>
+                    <div class="model-status online"></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #eab308, #ca8a04);">P</div>
+                    <h4>Perplexity</h4>
+                    <p>Perplexity AI</p>
+                    <div class="model-status online"></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #64748b, #475569);">O</div>
+                    <h4>Ollama</h4>
+                    <p>Local Models</p>
+                    <div class="model-status online"></div>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon" style="background: linear-gradient(135deg, #71717a, #3f3f46);">R</div>
+                    <h4>OpenRouter</h4>
+                    <p>Unified API</p>
+                    <div class="model-status online"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="models-controls">
+            <button class="model-btn prev" id="modelPrev" data-hover>
+                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="model-btn next" id="modelNext" data-hover>
+                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Chat Modes Section -->
+    <section id="modes" class="modes">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-tag">CHAT MODES</span>
+            <h2 class="section-title">8 Specialized <span class="gradient-text">Modes</span></h2>
+            <p class="section-subtitle">Choose the perfect mode for your needs</p>
+        </div>
+        
+        <div class="modes-tabs">
+            <button class="mode-tab active" data-mode="all" data-hover>All Modes</button>
+            <button class="mode-tab" data-mode="dev" data-hover>Development</button>
+            <button class="mode-tab" data-mode="learn" data-hover>Learning</button>
+            <button class="mode-tab" data-mode="creative" data-hover>Creative</button>
+        </div>
+        
+        <div class="modes-grid">
+            <div class="mode-card" data-category="dev" data-animate="fade-up" data-delay="0">
+                <div class="mode-bg" style="--hue: 220;"></div>
+                <div class="mode-content">
+                    <div class="mode-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+                    </div>
+                    <h3>Code Assistant</h3>
+                    <p>Debug, write, and understand code in any programming language with syntax highlighting.</p>
+                    <div class="mode-tags">
+                        <span>Python</span>
+                        <span>JavaScript</span>
+                        <span>+20</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mode-card" data-category="learn" data-animate="fade-up" data-delay="100">
+                <div class="mode-bg" style="--hue: 280;"></div>
+                <div class="mode-content">
+                    <div class="mode-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    </div>
+                    <h3>Research Mode</h3>
+                    <p>Deep research with citations, summaries, and comprehensive analysis on any topic.</p>
+                    <div class="mode-tags">
+                        <span>Academic</span>
+                        <span>Analysis</span>
+                        <span>Sources</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mode-card" data-category="creative" data-animate="fade-up" data-delay="200">
+                <div class="mode-bg" style="--hue: 330;"></div>
+                <div class="mode-content">
+                    <div class="mode-icon">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h3>Creative Writing</h3>
+                    <p>Stories, poems, scripts, and artistic content that sparks imagination.</p>
+                    <div class="mode-tags">
+                        <span>Stories</span>
+                        <span>Poetry</span>
+                        <span>Scripts</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mode-card" data-category="learn" data-animate="fade-up" data-delay="300">
+                <div class="mode-bg" style="--hue: 160;"></div>
+                <div class="mode-content">
+                    <div class="mode-icon">
+                        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 10h8M8 14h5"/></svg>
+                    </div>
+                    <h3>Math Solver</h3>
+                    <p>Step-by-step solutions for algebra, calculus, statistics, and beyond.</p>
+                    <div class="mode-tags">
+                        <span>Algebra</span>
+                        <span>Calculus</span>
+                        <span>Stats</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mode-card" data-category="all" data-animate="fade-up" data-delay="400">
+                <div class="mode-bg" style="--hue: 45;"></div>
+                <div class="mode-content">
+                    <div class="mode-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3>Translator</h3>
+                    <p>Translate text between 50+ languages with context-aware accuracy.</p>
+                    <div class="mode-tags">
+                        <span>50+ Languages</span>
+                        <span>Context</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mode-card" data-category="learn" data-animate="fade-up" data-delay="500">
+                <div class="mode-bg" style="--hue: 200;"></div>
+                <div class="mode-content">
+                    <div class="mode-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3>Study Buddy</h3>
+                    <p>Interactive learning with explanations, quizzes, and personalized study plans.</p>
+                    <div class="mode-tags">
+                        <span>Quizzes</span>
+                        <span>Flashcards</span>
+                        <span>Plans</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mode-card" data-category="all" data-animate="fade-up" data-delay="600">
+                <div class="mode-bg" style="--hue: 190;"></div>
+                <div class="mode-content">
+                    <div class="mode-icon">
+                        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h3>Quick Answer</h3>
+                    <p>Fast, concise answers to quick questions without lengthy explanations.</p>
+                    <div class="mode-tags">
+                        <span>Instant</span>
+                        <span>Brief</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mode-card" data-category="all" data-animate="fade-up" data-delay="700">
+                <div class="mode-bg" style="--hue: 260;"></div>
+                <div class="mode-content">
+                    <div class="mode-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <h3>General Chat</h3>
+                    <p>Free-form conversations for brainstorming, advice, and casual discussions.</p>
+                    <div class="mode-tags">
+                        <span>Casual</span>
+                        <span>Brainstorm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech" class="tech">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-tag">TECH STACK</span>
+            <h2 class="section-title">Built With <span class="gradient-text">Modern Tech</span></h2>
+            <p class="section-subtitle">The latest technologies for performance and reliability</p>
+        </div>
+        
+        <div class="tech-grid">
+            <div class="tech-category" data-animate="fade-up" data-delay="0">
+                <h3>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    Frontend
+                </h3>
+                <ul>
+                    <li data-hover>HTML5 / CSS3</li>
+                    <li data-hover>JavaScript ES6+</li>
+                    <li data-hover>Tailwind CSS</li>
+                </ul>
+            </div>
+            
+            <div class="tech-category" data-animate="fade-up" data-delay="100">
+                <h3>
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+                    Backend
+                </h3>
+                <ul>
+                    <li data-hover>Python</li>
+                    <li data-hover>FastAPI</li>
+                    <li data-hover>Uvicorn</li>
+                </ul>
+            </div>
+            
+            <div class="tech-category" data-animate="fade-up" data-delay="200">
+                <h3>
+                    <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                    Storage
+                </h3>
+                <ul>
+                    <li data-hover>Local JSON</li>
+                    <li data-hover>Session Memory</li>
+                    <li data-hover>History Cache</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+        <div class="demo-container" data-animate="fade-up">
+            <div class="demo-header">
+                <div class="demo-dot"></div>
+                <div class="demo-dot"></div>
+                <div class="demo-dot"></div>
+                <span class="demo-title">Saurabh AI - Live Demo</span>
+            </div>
+            
+            <div class="demo-chat">
+                <div class="chat-message bot">
+                    <div class="avatar">
+                        <svg viewBox="0 0 100 100">
+                            <polygon points="50,5 95,85 5,85" fill="none" stroke="#fff" stroke-width="3"/>
+                            <circle cx="50" cy="55" r="15" fill="none" stroke="#fff" stroke-width="2"/>
+                            <circle cx="50" cy="55" r="6" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="message-content">
+                        <p>Hello! I'm Saurabh AI. How can I help you today?</p>
+                        <span class="time">Just now</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="demo-input">
+                <input type="text" placeholder="Type your message..." id="demoInput">
+                <button class="send-btn" data-hover>
+                    <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-bg"></div>
+        <div class="cta-content" data-animate="fade-up">
+            <div class="cta-logo">
+                <svg viewBox="0 0 100 100">
+                    <polygon points="50,5 95,85 5,85" fill="none" stroke="#fff" stroke-width="3"/>
+                    <circle cx="50" cy="55" r="18" fill="none" stroke="#fff" stroke-width="2"/>
+                    <circle cx="50" cy="55" r="8" fill="#fff"/>
+                </svg>
+            </div>
+            <h2>Ready to Experience the <span class="gradient-text">Future</span>?</h2>
+            <p>Join the growing community of developers and AI enthusiasts.</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/quitsaurabhverma2008-sketch/Saurabh-ai" target="_blank" class="btn btn-primary btn-large" data-hover>
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span>Star on GitHub</span>
+                </a>
+                <a href="https://github.com/quitsaurabhverma2008-sketch" target="_blank" class="btn btn-outline btn-large" data-hover>
+                    <span>Follow Developer</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <svg viewBox="0 0 100 100" class="footer-logo">
+                    <polygon points="50,5 95,85 5,85" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="50" cy="55" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="50" cy="55" r="6" fill="currentColor"/>
+                </svg>
+                <span>Saurabh AI</span>
+            </div>
+            <div class="footer-links">
+                <a href="#features" data-hover>Features</a>
+                <a href="#models" data-hover>Models</a>
+                <a href="#modes" data-hover>Modes</a>
+                <a href="#tech" data-hover>Tech Stack</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/quitsaurabhverma2008-sketch" target="_blank" data-hover>
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Created by Saurabh Verma</p>
+            <p>Built with Python, FastAPI, and JavaScript</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
