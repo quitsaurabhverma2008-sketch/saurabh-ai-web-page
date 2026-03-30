@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saurabh AI - The Future of AI Conversation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Saurabh AI 🤖 - 67+ AI Models | GROQ + NVIDIA | The Future of AI</title>
+    <meta name="description" content="Experience 67+ powerful AI models from GROQ and NVIDIA. Lightning fast, persistent memory, beautiful 3D interface. Built by Saurabh Verma.">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,6 +14,10 @@
     
     <!-- Particle Overlay -->
     <div id="particles" class="particles-container"></div>
+    
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
     
     <!-- Loading Screen -->
     <div id="loader" class="loader">
@@ -49,13 +54,14 @@
             <div class="loader-bar">
                 <div class="loader-progress"></div>
             </div>
+            <div class="loader-percent" id="loaderPercent">0%</div>
         </div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="nav-logo" data-hover>
+            <a href="#home" class="nav-logo" data-tilt>
                 <svg viewBox="0 0 100 100" class="nav-logo-svg">
                     <defs>
                         <linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -72,23 +78,24 @@
             </a>
             
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link" data-hover>Home</a></li>
-                <li><a href="#features" class="nav-link" data-hover>Features</a></li>
-                <li><a href="#models" class="nav-link" data-hover>Models</a></li>
-                <li><a href="#modes" class="nav-link" data-hover>Modes</a></li>
-                <li><a href="#tech" class="nav-link" data-hover>Tech</a></li>
-                <li><a href="#demo" class="nav-link" data-hover>Demo</a></li>
+                <li><a href="#home" class="nav-link" data-hover3d>Home</a></li>
+                <li><a href="#stats" class="nav-link" data-hover3d>Stats</a></li>
+                <li><a href="#providers" class="nav-link" data-hover3d>Providers</a></li>
+                <li><a href="#models" class="nav-link" data-hover3d>Models</a></li>
+                <li><a href="#features" class="nav-link" data-hover3d>Features</a></li>
+                <li><a href="#architecture" class="nav-link" data-hover3d>How It Works</a></li>
+                <li><a href="#demo" class="nav-link" data-hover3d>Demo</a></li>
             </ul>
             
             <div class="nav-actions">
-                <a href="https://github.com/quitsaurabhverma2008-sketch" target="_blank" class="nav-github" data-hover>
+                <a href="https://github.com/quitsaurabhverma2008-sketch/Saurabh-ai" target="_blank" class="nav-github" data-hover3d>
                     <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                 </a>
-                <button class="theme-toggle" id="themeToggle" data-hover>
+                <button class="theme-toggle" id="themeToggle" data-hover3d>
                     <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                     <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 </button>
-                <button class="mobile-menu-btn" id="mobileMenuBtn" data-hover>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" data-hover3d>
                     <span></span>
                     <span></span>
                     <span></span>
@@ -99,59 +106,47 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="hero-bg-elements">
+            <div class="hero-orb orb-1"></div>
+            <div class="hero-orb orb-2"></div>
+            <div class="hero-orb orb-3"></div>
+        </div>
+        
         <div class="hero-content">
-            <div class="hero-badge" data-animate="fade-up">
+            <div class="hero-badge" data-animate="glitch-fade" data-delay="0">
                 <span class="badge-icon">
                     <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                 </span>
-                <span>12 Next-Gen AI Models</span>
+                <span class="badge-text">67+ Next-Gen AI Models</span>
             </div>
             
-            <h1 class="hero-title" data-animate="fade-up" data-delay="100">
+            <h1 class="hero-title" data-animate="wave-reveal" data-delay="100">
                 <span class="title-line">THE FUTURE OF</span>
-                <span class="title-gradient">AI CONVERSATION</span>
+                <span class="title-gradient" data-text="AI CONVERSATION">AI CONVERSATION</span>
             </h1>
             
             <p class="hero-subtitle" data-animate="fade-up" data-delay="200">
                 Experience the next evolution in artificial intelligence with 
-                <span class="highlight">12 powerful models</span>, 
-                <span class="highlight">8 specialized modes</span>, and 
-                <span class="highlight">persistent memory</span>.
+                <span class="highlight" data-text="67+ powerful models">67+ powerful models</span>, 
+                <span class="highlight" data-text="GROQ + NVIDIA">GROQ + NVIDIA</span>, and 
+                <span class="highlight" data-text="persistent memory">persistent memory</span>.
             </p>
             
-            <div class="hero-cta" data-animate="fade-up" data-delay="300">
-                <a href="https://github.com/quitsaurabhverma2008-sketch/Saurabh-ai" target="_blank" class="btn btn-primary" data-hover>
+            <div class="hero-cta" data-animate="bounce-in" data-delay="300">
+                <a href="https://github.com/quitsaurabhverma2008-sketch/Saurabh-ai" target="_blank" class="btn btn-primary btn-3d" data-tilt data-hover3d>
                     <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                     <span>Star on GitHub</span>
+                    <span class="btn-shine"></span>
                 </a>
-                <a href="#features" class="btn btn-secondary" data-hover>
-                    <span>Explore Features</span>
+                <a href="#demo" class="btn btn-secondary btn-3d" data-tilt data-hover3d>
+                    <span>Try Demo</span>
                     <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
             </div>
-            
-            <div class="hero-stats" data-animate="fade-up" data-delay="400">
-                <div class="stat" data-count="12">
-                    <span class="stat-number">12</span>
-                    <span class="stat-label">AI Models</span>
-                </div>
-                <div class="stat" data-count="8">
-                    <span class="stat-number">8</span>
-                    <span class="stat-label">Chat Modes</span>
-                </div>
-                <div class="stat" data-count="50">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">Languages</span>
-                </div>
-                <div class="stat" data-count="100">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Free</span>
-                </div>
-            </div>
         </div>
         
-        <div class="hero-visual" data-animate="fade-left" data-delay="200">
-            <div class="floating-card">
+        <div class="hero-visual" data-animate="float-3d" data-delay="200">
+            <div class="floating-card" data-tilt>
                 <div class="card-glow"></div>
                 <div class="card-content">
                     <div class="ai-orb">
@@ -181,367 +176,438 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="section-header" data-animate="fade-up">
-            <span class="section-tag">FEATURES</span>
-            <h2 class="section-title">Built for the <span class="gradient-text">Next Generation</span></h2>
-            <p class="section-subtitle">Cutting-edge technology meets intuitive design</p>
+    <!-- Stats Dashboard Section -->
+    <section id="stats" class="stats-section">
+        <div class="section-header" data-animate="scale-in">
+            <span class="section-tag" data-animate="glow-pulse">STATS</span>
+            <h2 class="section-title">By The <span class="gradient-text" data-text="Numbers">Numbers</span></h2>
+            <p class="section-subtitle">The power behind Saurabh AI</p>
         </div>
         
-        <div class="features-grid">
-            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="0">
-                <div class="feature-icon">
+        <div class="stats-grid">
+            <div class="stat-card" data-tilt data-animate="flip-in">
+                <div class="stat-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4c0 1.1-.45 2.1-1.17 2.83L15 9h2a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2h-1v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2H5a2 2 0 0 1-2-2v-1a3 3 0 0 1 3-3h2l.17-.17A4 4 0 0 1 12 2z"/></svg>
                 </div>
-                <h3>12 AI Models</h3>
-                <p>Access Gemini, Grok, Mistral, DeepSeek, Claude, ChatGPT, and more in one unified interface.</p>
-                <div class="feature-glow"></div>
+                <div class="stat-number" data-count="67">0</div>
+                <div class="stat-label">AI Models</div>
+                <div class="stat-detail">59 NVIDIA + 8 GROQ</div>
             </div>
             
-            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="100">
-                <div class="feature-icon">
+            <div class="stat-card" data-tilt data-animate="flip-in" data-delay="100">
+                <div class="stat-icon">
                     <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01"/></svg>
                 </div>
-                <h3>Persistent Memory</h3>
-                <p>Your conversations are stored locally, creating a personalized experience that remembers everything.</p>
-                <div class="feature-glow"></div>
+                <div class="stat-number" data-count="20">0</div>
+                <div class="stat-label">API Keys</div>
+                <div class="stat-detail">10 GROQ + 10 NVIDIA</div>
             </div>
             
-            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="200">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                </div>
-                <h3>Lightning Fast</h3>
-                <p>Optimized FastAPI backend with streaming support for real-time, instant responses.</p>
-                <div class="feature-glow"></div>
-            </div>
-            
-            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="300">
-                <div class="feature-icon">
+            <div class="stat-card" data-tilt data-animate="flip-in" data-delay="200">
+                <div class="stat-icon">
                     <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 </div>
-                <h3>8 Chat Modes</h3>
-                <p>Specialized modes for coding, research, creative writing, math, translation, and more.</p>
-                <div class="feature-glow"></div>
+                <div class="stat-number" data-count="12">0</div>
+                <div class="stat-label">Model Categories</div>
+                <div class="stat-detail">Reasoning, Coding, Vision...</div>
             </div>
             
-            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="400">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+            <div class="stat-card" data-tilt data-animate="flip-in" data-delay="300">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                 </div>
-                <h3>Code Support</h3>
-                <p>Syntax highlighting, code copying, and language-specific assistance for developers.</p>
-                <div class="feature-glow"></div>
+                <div class="stat-number" data-count="100" data-suffix="%">0</div>
+                <div class="stat-label">Free</div>
+                <div class="stat-detail">No hidden charges</div>
             </div>
             
-            <div class="feature-card" data-tilt data-animate="fade-up" data-delay="500">
-                <div class="feature-icon">
+            <div class="stat-card" data-tilt data-animate="flip-in" data-delay="400">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <div class="stat-number" data-count="50" data-suffix="+">0</div>
+                <div class="stat-label">Languages</div>
+                <div class="stat-detail">Multilingual support</div>
+            </div>
+            
+            <div class="stat-card" data-tilt data-animate="flip-in" data-delay="500">
+                <div class="stat-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <h3>Privacy First</h3>
-                <p>Your data stays on your device. No tracking, no collection. Complete privacy guaranteed.</p>
-                <div class="feature-glow"></div>
+                <div class="stat-number" data-count="365">0</div>
+                <div class="stat-label">Days Token Valid</div>
+                <div class="stat-detail">JWT Authentication</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Providers Section -->
+    <section id="providers" class="providers-section">
+        <div class="section-header" data-animate="slide-up">
+            <span class="section-tag" data-animate="rainbow-glow">AI PROVIDERS</span>
+            <h2 class="section-title">Powered By <span class="gradient-text" data-text="Top Tier">Top Tier</span></h2>
+            <p class="section-subtitle">Two industry-leading AI providers united</p>
+        </div>
+        
+        <div class="providers-grid">
+            <div class="provider-card groq" data-tilt data-animate="rotate-in">
+                <div class="provider-badge">8 MODELS</div>
+                <div class="provider-visual">
+                    <div class="provider-icon">Q</div>
+                    <div class="provider-particles"></div>
+                </div>
+                <h3>GROQ</h3>
+                <p class="provider-company">Groq AI</p>
+                <div class="provider-stats">
+                    <div class="provider-stat">
+                        <span class="stat-value">250K</span>
+                        <span class="stat-name">TPM</span>
+                    </div>
+                    <div class="provider-stat">
+                        <span class="stat-value">30</span>
+                        <span class="stat-name">RPM</span>
+                    </div>
+                    <div class="provider-stat">
+                        <span class="stat-value">131K</span>
+                        <span class="stat-name">Context</span>
+                    </div>
+                </div>
+                <ul class="provider-models">
+                    <li data-hover3d><span class="model-name">Sage</span> - Llama 3.3 70B</li>
+                    <li data-hover3d><span class="model-name">Poly</span> - Qwen3 32B</li>
+                    <li data-hover3d><span class="model-name">Quick</span> - Llama 3.1 8B</li>
+                    <li data-hover3d><span class="model-name">Scout</span> - Llama 4 Scout</li>
+                </ul>
+                <a href="https://console.groq.com" target="_blank" class="provider-link" data-hover3d>
+                    <span>Get API Key</span>
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                </a>
+            </div>
+            
+            <div class="provider-card nvidia" data-tilt data-animate="rotate-in" data-delay="200">
+                <div class="provider-badge nvidia">59 MODELS</div>
+                <div class="provider-visual">
+                    <div class="provider-icon nv">N</div>
+                    <div class="provider-particles"></div>
+                </div>
+                <h3>NVIDIA</h3>
+                <p class="provider-company">NVIDIA Build</p>
+                <div class="provider-stats">
+                    <div class="provider-stat">
+                        <span class="stat-value">40</span>
+                        <span class="stat-name">RPM</span>
+                    </div>
+                    <div class="provider-stat">
+                        <span class="stat-value">10M</span>
+                        <span class="stat-name">Max Context</span>
+                    </div>
+                    <div class="provider-stat">
+                        <span class="stat-value">256K</span>
+                        <span class="stat-name">Std Context</span>
+                    </div>
+                </div>
+                <ul class="provider-models">
+                    <li data-hover3d><span class="model-name">DeepSeek V3.2</span> - 685B Reasoning</li>
+                    <li data-hover3d><span class="model-name">Devstral</span> - 123B Coding</li>
+                    <li data-hover3d><span class="model-name">Mistral Large 3</span> - State-of-art</li>
+                    <li data-hover3d><span class="model-name">Kimi K2</span> - MoE All-rounder</li>
+                </ul>
+                <a href="https://build.nvidia.com" target="_blank" class="provider-link" data-hover3d>
+                    <span>Get API Key</span>
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- AI Models Section -->
-    <section id="models" class="models">
-        <div class="section-header" data-animate="fade-up">
-            <span class="section-tag">AI MODELS</span>
-            <h2 class="section-title">Power of <span class="gradient-text">12 Models</span></h2>
-            <p class="section-subtitle">The best AI providers, unified in one interface</p>
+    <section id="models" class="models-section">
+        <div class="section-header" data-animate="parallax-in">
+            <span class="section-tag" data-animate="neon-flicker">AI MODELS</span>
+            <h2 class="section-title">All <span class="gradient-text" data-text="67+ Models">67+ Models</span></h2>
+            <p class="section-subtitle">Browse by category or explore all models</p>
         </div>
         
-        <div class="models-carousel">
-            <div class="models-track" id="modelsTrack">
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #4285f4, #34a853);">G</div>
-                    <h4>Gemini</h4>
-                    <p>Google AI</p>
-                    <div class="model-status online"></div>
-                </div>
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">X</div>
-                    <h4>Grok</h4>
-                    <p>xAI</p>
-                    <div class="model-status online"></div>
-                </div>
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #f97316, #ef4444);">M</div>
-                    <h4>Mistral</h4>
-                    <p>Mistral AI</p>
-                    <div class="model-status online"></div>
-                </div>
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #06b6d4, #10b981);">D</div>
-                    <h4>DeepSeek</h4>
-                    <p>DeepSeek AI</p>
-                    <div class="model-status online"></div>
-                </div>
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">C</div>
-                    <h4>Claude</h4>
-                    <p>Anthropic</p>
-                    <div class="model-status online"></div>
-                </div>
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #22c55e, #14b8a6);">O</div>
-                    <h4>ChatGPT</h4>
-                    <p>OpenAI</p>
-                    <div class="model-status online"></div>
-                </div>
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">Q</div>
-                    <h4>Groq</h4>
-                    <p>Groq AI</p>
-                    <div class="model-status online"></div>
-                </div>
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">C</div>
-                    <h4>Cohere</h4>
-                    <p>Cohere AI</p>
-                    <div class="model-status online"></div>
-                </div>
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">T</div>
-                    <h4>Together</h4>
-                    <p>Together AI</p>
-                    <div class="model-status online"></div>
-                </div>
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #eab308, #ca8a04);">P</div>
-                    <h4>Perplexity</h4>
-                    <p>Perplexity AI</p>
-                    <div class="model-status online"></div>
-                </div>
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #64748b, #475569);">O</div>
-                    <h4>Ollama</h4>
-                    <p>Local Models</p>
-                    <div class="model-status online"></div>
-                </div>
-                <div class="model-card">
-                    <div class="model-icon" style="background: linear-gradient(135deg, #71717a, #3f3f46);">R</div>
-                    <h4>OpenRouter</h4>
-                    <p>Unified API</p>
-                    <div class="model-status online"></div>
-                </div>
-            </div>
+        <div class="models-tabs">
+            <button class="model-tab active" data-category="all" data-hover3d>All</button>
+            <button class="model-tab" data-category="reasoning" data-hover3d>🧠 Reasoning</button>
+            <button class="model-tab" data-category="coding" data-hover3d>💻 Coding</button>
+            <button class="model-tab" data-category="vision" data-hover3d>👁️ Vision</button>
+            <button class="model-tab" data-category="chat" data-hover3d>💬 Chat</button>
+            <button class="model-tab" data-category="agentic" data-hover3d>🤖 Agentic</button>
+            <button class="model-tab" data-category="multilingual" data-hover3d>🌍 Multilingual</button>
+            <button class="model-tab" data-category="safety" data-hover3d>🛡️ Safety</button>
         </div>
         
-        <div class="models-controls">
-            <button class="model-btn prev" id="modelPrev" data-hover>
+        <div class="models-grid" id="modelsGrid">
+            <!-- Models will be populated by JavaScript -->
+        </div>
+        
+        <div class="models-pagination">
+            <button class="pagination-btn prev" data-hover3d disabled>
                 <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
-            <button class="model-btn next" id="modelNext" data-hover>
+            <span class="pagination-info"><span id="currentPage">1</span> / <span id="totalPages">7</span></span>
+            <button class="pagination-btn next" data-hover3d>
                 <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
             </button>
         </div>
     </section>
 
-    <!-- Chat Modes Section -->
-    <section id="modes" class="modes">
-        <div class="section-header" data-animate="fade-up">
-            <span class="section-tag">CHAT MODES</span>
-            <h2 class="section-title">8 Specialized <span class="gradient-text">Modes</span></h2>
-            <p class="section-subtitle">Choose the perfect mode for your needs</p>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-header" data-animate="wave-in">
+            <span class="section-tag" data-animate="pulse-glow">FEATURES</span>
+            <h2 class="section-title">Built For The <span class="gradient-text" data-text="Next Generation">Next Generation</span></h2>
+            <p class="section-subtitle">Cutting-edge technology meets intuitive design</p>
         </div>
         
-        <div class="modes-tabs">
-            <button class="mode-tab active" data-mode="all" data-hover>All Modes</button>
-            <button class="mode-tab" data-mode="dev" data-hover>Development</button>
-            <button class="mode-tab" data-mode="learn" data-hover>Learning</button>
-            <button class="mode-tab" data-mode="creative" data-hover>Creative</button>
-        </div>
-        
-        <div class="modes-grid">
-            <div class="mode-card" data-category="dev" data-animate="fade-up" data-delay="0">
-                <div class="mode-bg" style="--hue: 220;"></div>
-                <div class="mode-content">
-                    <div class="mode-icon">
-                        <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
-                    </div>
-                    <h3>Code Assistant</h3>
-                    <p>Debug, write, and understand code in any programming language with syntax highlighting.</p>
-                    <div class="mode-tags">
-                        <span>Python</span>
-                        <span>JavaScript</span>
-                        <span>+20</span>
-                    </div>
+        <div class="features-grid">
+            <div class="feature-card" data-tilt data-animate="stagger-in" data-delay="0">
+                <div class="feature-icon" data-animate="rotate-3d">
+                    <svg viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4c0 1.1-.45 2.1-1.17 2.83L15 9h2a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2h-1v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2H5a2 2 0 0 1-2-2v-1a3 3 0 0 1 3-3h2l.17-.17A4 4 0 0 1 12 2z"/></svg>
                 </div>
+                <h3 data-animate="typewriter">67+ AI Models</h3>
+                <p>Access GROQ and NVIDIA models in one unified interface with smart auto-selection.</p>
+                <div class="feature-tags">
+                    <span class="tag" data-hover3d>GROQ</span>
+                    <span class="tag" data-hover3d>NVIDIA</span>
+                    <span class="tag" data-hover3d>Auto-Select</span>
+                </div>
+                <div class="feature-glow"></div>
+                <div class="feature-shine"></div>
             </div>
             
-            <div class="mode-card" data-category="learn" data-animate="fade-up" data-delay="100">
-                <div class="mode-bg" style="--hue: 280;"></div>
-                <div class="mode-content">
-                    <div class="mode-icon">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                    </div>
-                    <h3>Research Mode</h3>
-                    <p>Deep research with citations, summaries, and comprehensive analysis on any topic.</p>
-                    <div class="mode-tags">
-                        <span>Academic</span>
-                        <span>Analysis</span>
-                        <span>Sources</span>
-                    </div>
+            <div class="feature-card" data-tilt data-animate="stagger-in" data-delay="100">
+                <div class="feature-icon" data-animate="rotate-3d">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01"/></svg>
                 </div>
+                <h3 data-animate="typewriter">Persistent Memory</h3>
+                <p>Your conversations are stored locally, creating a personalized AI that remembers everything.</p>
+                <div class="feature-tags">
+                    <span class="tag" data-hover3d>LocalStorage</span>
+                    <span class="tag" data-hover3d>Context</span>
+                </div>
+                <div class="feature-glow"></div>
+                <div class="feature-shine"></div>
             </div>
             
-            <div class="mode-card" data-category="creative" data-animate="fade-up" data-delay="200">
-                <div class="mode-bg" style="--hue: 330;"></div>
-                <div class="mode-content">
-                    <div class="mode-icon">
-                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    </div>
-                    <h3>Creative Writing</h3>
-                    <p>Stories, poems, scripts, and artistic content that sparks imagination.</p>
-                    <div class="mode-tags">
-                        <span>Stories</span>
-                        <span>Poetry</span>
-                        <span>Scripts</span>
-                    </div>
+            <div class="feature-card" data-tilt data-animate="stagger-in" data-delay="200">
+                <div class="feature-icon" data-animate="rotate-3d">
+                    <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                 </div>
+                <h3 data-animate="typewriter">Lightning Fast</h3>
+                <p>GROQ's LPU Inference Engine delivers the fastest responses with streaming support.</p>
+                <div class="feature-tags">
+                    <span class="tag" data-hover3d>Streaming</span>
+                    <span class="tag" data-hover3d>FastAPI</span>
+                </div>
+                <div class="feature-glow"></div>
+                <div class="feature-shine"></div>
             </div>
             
-            <div class="mode-card" data-category="learn" data-animate="fade-up" data-delay="300">
-                <div class="mode-bg" style="--hue: 160;"></div>
-                <div class="mode-content">
-                    <div class="mode-icon">
-                        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 10h8M8 14h5"/></svg>
-                    </div>
-                    <h3>Math Solver</h3>
-                    <p>Step-by-step solutions for algebra, calculus, statistics, and beyond.</p>
-                    <div class="mode-tags">
-                        <span>Algebra</span>
-                        <span>Calculus</span>
-                        <span>Stats</span>
-                    </div>
+            <div class="feature-card" data-tilt data-animate="stagger-in" data-delay="300">
+                <div class="feature-icon" data-animate="rotate-3d">
+                    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 </div>
+                <h3 data-animate="typewriter">12 Categories</h3>
+                <p>Specialized modes for coding, research, creative writing, math, translation, and more.</p>
+                <div class="feature-tags">
+                    <span class="tag" data-hover3d>Reasoning</span>
+                    <span class="tag" data-hover3d>Coding</span>
+                    <span class="tag" data-hover3d>Vision</span>
+                </div>
+                <div class="feature-glow"></div>
+                <div class="feature-shine"></div>
             </div>
             
-            <div class="mode-card" data-category="all" data-animate="fade-up" data-delay="400">
-                <div class="mode-bg" style="--hue: 45;"></div>
-                <div class="mode-content">
-                    <div class="mode-icon">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                    </div>
-                    <h3>Translator</h3>
-                    <p>Translate text between 50+ languages with context-aware accuracy.</p>
-                    <div class="mode-tags">
-                        <span>50+ Languages</span>
-                        <span>Context</span>
-                    </div>
+            <div class="feature-card" data-tilt data-animate="stagger-in" data-delay="400">
+                <div class="feature-icon" data-animate="rotate-3d">
+                    <svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
                 </div>
+                <h3 data-animate="typewriter">Code Support</h3>
+                <p>Syntax highlighting, code copying, and language-specific assistance for developers.</p>
+                <div class="feature-tags">
+                    <span class="tag" data-hover3d>Syntax</span>
+                    <span class="tag" data-hover3d>Copy</span>
+                    <span class="tag" data-hover3d>20+ Languages</span>
+                </div>
+                <div class="feature-glow"></div>
+                <div class="feature-shine"></div>
             </div>
             
-            <div class="mode-card" data-category="learn" data-animate="fade-up" data-delay="500">
-                <div class="mode-bg" style="--hue: 200;"></div>
-                <div class="mode-content">
-                    <div class="mode-icon">
-                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    </div>
-                    <h3>Study Buddy</h3>
-                    <p>Interactive learning with explanations, quizzes, and personalized study plans.</p>
-                    <div class="mode-tags">
-                        <span>Quizzes</span>
-                        <span>Flashcards</span>
-                        <span>Plans</span>
-                    </div>
+            <div class="feature-card" data-tilt data-animate="stagger-in" data-delay="500">
+                <div class="feature-icon" data-animate="rotate-3d">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
+                <h3 data-animate="typewriter">Privacy First</h3>
+                <p>Your data stays on your device. No tracking, no collection. Complete privacy guaranteed.</p>
+                <div class="feature-tags">
+                    <span class="tag" data-hover3d>Local</span>
+                    <span class="tag" data-hover3d>Secure</span>
+                </div>
+                <div class="feature-glow"></div>
+                <div class="feature-shine"></div>
             </div>
             
-            <div class="mode-card" data-category="all" data-animate="fade-up" data-delay="600">
-                <div class="mode-bg" style="--hue: 190;"></div>
-                <div class="mode-content">
-                    <div class="mode-icon">
-                        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                    </div>
-                    <h3>Quick Answer</h3>
-                    <p>Fast, concise answers to quick questions without lengthy explanations.</p>
-                    <div class="mode-tags">
-                        <span>Instant</span>
-                        <span>Brief</span>
-                    </div>
+            <div class="feature-card" data-tilt data-animate="stagger-in" data-delay="600">
+                <div class="feature-icon" data-animate="rotate-3d">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
+                <h3 data-animate="typewriter">Load Balancer</h3>
+                <p>20 API keys across GROQ and NVIDIA for maximum reliability and speed.</p>
+                <div class="feature-tags">
+                    <span class="tag" data-hover3d>Round Robin</span>
+                    <span class="tag" data-hover3d>Failover</span>
+                </div>
+                <div class="feature-glow"></div>
+                <div class="feature-shine"></div>
             </div>
             
-            <div class="mode-card" data-category="all" data-animate="fade-up" data-delay="700">
-                <div class="mode-bg" style="--hue: 260;"></div>
-                <div class="mode-content">
-                    <div class="mode-icon">
-                        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                    </div>
-                    <h3>General Chat</h3>
-                    <p>Free-form conversations for brainstorming, advice, and casual discussions.</p>
-                    <div class="mode-tags">
-                        <span>Casual</span>
-                        <span>Brainstorm</span>
-                    </div>
+            <div class="feature-card" data-tilt data-animate="stagger-in" data-delay="700">
+                <div class="feature-icon" data-animate="rotate-3d">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
                 </div>
+                <h3 data-animate="typewriter">3D Interface</h3>
+                <p>Stunning 3D animated website with Three.js, glassmorphism, and smooth transitions.</p>
+                <div class="feature-tags">
+                    <span class="tag" data-hover3d>Three.js</span>
+                    <span class="tag" data-hover3d>WebGL</span>
+                </div>
+                <div class="feature-glow"></div>
+                <div class="feature-shine"></div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack Section -->
-    <section id="tech" class="tech">
-        <div class="section-header" data-animate="fade-up">
-            <span class="section-tag">TECH STACK</span>
-            <h2 class="section-title">Built With <span class="gradient-text">Modern Tech</span></h2>
-            <p class="section-subtitle">The latest technologies for performance and reliability</p>
+    <!-- Architecture Section -->
+    <section id="architecture" class="architecture-section">
+        <div class="section-header" data-animate="slide-down">
+            <span class="section-tag" data-animate="mirror-effect">HOW IT WORKS</span>
+            <h2 class="section-title">System <span class="gradient-text" data-text="Architecture">Architecture</span></h2>
+            <p class="section-subtitle">How Saurabh AI processes your requests</p>
         </div>
         
-        <div class="tech-grid">
-            <div class="tech-category" data-animate="fade-up" data-delay="0">
-                <h3>
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                    Frontend
-                </h3>
-                <ul>
-                    <li data-hover>HTML5 / CSS3</li>
-                    <li data-hover>JavaScript ES6+</li>
-                    <li data-hover>Tailwind CSS</li>
-                </ul>
+        <div class="architecture-flow">
+            <div class="flow-step" data-animate="bounce-in" data-delay="0">
+                <div class="step-number">1</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <h4>User Request</h4>
+                <p>You send a message through the beautiful 3D interface</p>
             </div>
             
-            <div class="tech-category" data-animate="fade-up" data-delay="100">
-                <h3>
-                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
-                    Backend
-                </h3>
-                <ul>
-                    <li data-hover>Python</li>
-                    <li data-hover>FastAPI</li>
-                    <li data-hover>Uvicorn</li>
-                </ul>
+            <div class="flow-connector">
+                <div class="connector-line"></div>
+                <div class="connector-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
             </div>
             
-            <div class="tech-category" data-animate="fade-up" data-delay="200">
-                <h3>
-                    <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-                    Storage
-                </h3>
-                <ul>
-                    <li data-hover>Local JSON</li>
-                    <li data-hover>Session Memory</li>
-                    <li data-hover>History Cache</li>
-                </ul>
+            <div class="flow-step" data-animate="bounce-in" data-delay="200">
+                <div class="step-number">2</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h4>JWT Auth</h4>
+                <p>FastAPI validates your token and processes the request</p>
+            </div>
+            
+            <div class="flow-connector">
+                <div class="connector-line"></div>
+                <div class="connector-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+            
+            <div class="flow-step" data-animate="bounce-in" data-delay="400">
+                <div class="step-number">3</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </div>
+                <h4>Model Router</h4>
+                <p>Smart routing selects the best model based on keywords</p>
+            </div>
+            
+            <div class="flow-connector">
+                <div class="connector-line"></div>
+                <div class="connector-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+            
+            <div class="flow-step" data-animate="bounce-in" data-delay="600">
+                <div class="step-number">4</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                </div>
+                <h4>Load Balancer</h4>
+                <p>Round-robin selects the next API key for maximum uptime</p>
+            </div>
+            
+            <div class="flow-connector">
+                <div class="connector-line"></div>
+                <div class="connector-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </div>
+            
+            <div class="flow-step" data-animate="bounce-in" data-delay="800">
+                <div class="step-number">5</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <h4>AI Response</h4>
+                <p>Streaming response delivered in real-time to your screen</p>
+            </div>
+        </div>
+        
+        <div class="tech-stack">
+            <h3 data-animate="fade-up">Tech Stack</h3>
+            <div class="tech-badges">
+                <span class="tech-badge" data-tilt data-hover3d>Python</span>
+                <span class="tech-badge" data-tilt data-hover3d>FastAPI</span>
+                <span class="tech-badge" data-tilt data-hover3d>JWT</span>
+                <span class="tech-badge" data-tilt data-hover3d>Three.js</span>
+                <span class="tech-badge" data-tilt data-hover3d>WebGL</span>
+                <span class="tech-badge" data-tilt data-hover3d>SQLite</span>
+                <span class="tech-badge" data-tilt data-hover3d>GROQ API</span>
+                <span class="tech-badge" data-tilt data-hover3d>NVIDIA API</span>
             </div>
         </div>
     </section>
 
     <!-- Demo Section -->
-    <section id="demo" class="demo">
-        <div class="demo-container" data-animate="fade-up">
+    <section id="demo" class="demo-section">
+        <div class="section-header" data-animate="zoom-in">
+            <span class="section-tag" data-animate="pulse-ring-anim">LIVE DEMO</span>
+            <h2 class="section-title">Try <span class="gradient-text" data-text="Saurabh AI">Saurabh AI</span></h2>
+            <p class="section-subtitle">Chat with our AI right here!</p>
+        </div>
+        
+        <div class="demo-container" data-tilt data-animate="glassmorphism">
             <div class="demo-header">
-                <div class="demo-dot"></div>
-                <div class="demo-dot"></div>
-                <div class="demo-dot"></div>
-                <span class="demo-title">Saurabh AI - Live Demo</span>
+                <div class="demo-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <span class="demo-title">
+                    <span class="status-indicator"></span>
+                    Saurabh AI - Live Demo
+                </span>
+                <div class="demo-model-select">
+                    <select id="demoModel">
+                        <option value="llama-3.3-70b-versatile">Sage (Llama 3.3 70B)</option>
+                        <option value="qwen/qwen3-32b">Poly (Qwen3 32B)</option>
+                        <option value="meta-llama/llama-3.1-8b-instant">Quick (Llama 3.1 8B)</option>
+                        <option value="groq/compound">Compound</option>
+                    </select>
+                </div>
             </div>
             
-            <div class="demo-chat">
+            <div class="demo-chat" id="demoChat">
                 <div class="chat-message bot">
                     <div class="avatar">
                         <svg viewBox="0 0 100 100">
@@ -551,42 +617,86 @@
                         </svg>
                     </div>
                     <div class="message-content">
-                        <p>Hello! I'm Saurabh AI. How can I help you today?</p>
+                        <p>Hello! I'm <strong>Saurabh AI</strong> 🤖</p>
+                        <p>I have access to <strong>67+ AI models</strong> from GROQ and NVIDIA!</p>
+                        <p>Ask me anything - coding, research, creative writing, or just chat!</p>
                         <span class="time">Just now</span>
                     </div>
                 </div>
             </div>
             
-            <div class="demo-input">
-                <input type="text" placeholder="Type your message..." id="demoInput">
-                <button class="send-btn" data-hover>
-                    <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                </button>
+            <div class="demo-input-container">
+                <div class="demo-input">
+                    <input type="text" placeholder="Type your message..." id="demoInput" data-animate="focus-glow">
+                    <button class="send-btn" id="sendBtn" data-hover3d>
+                        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </div>
+                <div class="demo-info">
+                    <span class="info-badge">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                        Powered by GROQ API
+                    </span>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- About Creator Section -->
+    <section id="creator" class="creator-section">
+        <div class="section-header" data-animate="fade-up">
+            <span class="section-tag">CREATOR</span>
+            <h2 class="section-title">Built By <span class="gradient-text" data-text="Saurabh">Saurabh</span></h2>
+        </div>
+        
+        <div class="creator-card" data-tilt data-animate="float">
+            <div class="creator-avatar">
+                <div class="avatar-ring"></div>
+                <div class="avatar-inner">SV</div>
+            </div>
+            <h3>Saurabh Verma</h3>
+            <p class="creator-title">Aspiring Developer from India</p>
+            <p class="creator-story">
+                Started learning Python from scratch and built this powerful AI chat application. 
+                This project showcases the power of modern AI APIs combined with beautiful web design.
+            </p>
+            <div class="creator-links">
+                <a href="https://github.com/quitsaurabhverma2008-sketch" target="_blank" class="creator-link" data-hover3d>
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <a href="mailto:uniquegksaurabh@gmail.com" class="creator-link" data-hover3d>
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Email
+                </a>
+            </div>
+            <p class="creator-quote">"Built with ❤️ while learning Python from scratch"</p>
         </div>
     </section>
 
     <!-- CTA Section -->
     <section class="cta">
-        <div class="cta-bg"></div>
-        <div class="cta-content" data-animate="fade-up">
-            <div class="cta-logo">
+        <div class="cta-bg">
+            <div class="cta-particles"></div>
+        </div>
+        <div class="cta-content" data-animate="scale-up">
+            <div class="cta-logo" data-animate="rotate-3d">
                 <svg viewBox="0 0 100 100">
                     <polygon points="50,5 95,85 5,85" fill="none" stroke="#fff" stroke-width="3"/>
                     <circle cx="50" cy="55" r="18" fill="none" stroke="#fff" stroke-width="2"/>
                     <circle cx="50" cy="55" r="8" fill="#fff"/>
                 </svg>
             </div>
-            <h2>Ready to Experience the <span class="gradient-text">Future</span>?</h2>
+            <h2 data-animate="glitch-text">Ready to Experience the <span class="gradient-text" data-text="Future?">Future?</span></h2>
             <p>Join the growing community of developers and AI enthusiasts.</p>
             <div class="cta-buttons">
-                <a href="https://github.com/quitsaurabhverma2008-sketch/Saurabh-ai" target="_blank" class="btn btn-primary btn-large" data-hover>
+                <a href="https://github.com/quitsaurabhverma2008-sketch/Saurabh-ai" target="_blank" class="btn btn-primary btn-large btn-3d" data-tilt data-hover3d>
                     <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                     <span>Star on GitHub</span>
                 </a>
-                <a href="https://github.com/quitsaurabhverma2008-sketch" target="_blank" class="btn btn-outline btn-large" data-hover>
-                    <span>Follow Developer</span>
-                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <a href="https://saurabh-ai.onrender.com" target="_blank" class="btn btn-outline btn-large btn-3d" data-tilt data-hover3d>
+                    <span>Try Saurabh AI</span>
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
                 </a>
             </div>
         </div>
@@ -604,22 +714,33 @@
                 <span>Saurabh AI</span>
             </div>
             <div class="footer-links">
-                <a href="#features" data-hover>Features</a>
-                <a href="#models" data-hover>Models</a>
-                <a href="#modes" data-hover>Modes</a>
-                <a href="#tech" data-hover>Tech Stack</a>
+                <a href="#home" data-hover3d>Home</a>
+                <a href="#stats" data-hover3d>Stats</a>
+                <a href="#providers" data-hover3d>Providers</a>
+                <a href="#models" data-hover3d>Models</a>
+                <a href="#features" data-hover3d>Features</a>
+                <a href="#demo" data-hover3d>Demo</a>
             </div>
             <div class="footer-social">
-                <a href="https://github.com/quitsaurabhverma2008-sketch" target="_blank" data-hover>
+                <a href="https://github.com/quitsaurabhverma2008-sketch" target="_blank" data-hover3d>
                     <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                 </a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>Created by Saurabh Verma</p>
-            <p>Built with Python, FastAPI, and JavaScript</p>
+            <p>Created by <strong>Saurabh Verma</strong></p>
+            <p>Built with Python, FastAPI, Three.js & JavaScript</p>
+            <p class="footer-version">v2.0.0 | March 2026</p>
         </div>
     </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <span class="toast-icon">✓</span>
+            <span class="toast-message"></span>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
