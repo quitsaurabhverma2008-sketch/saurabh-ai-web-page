@@ -359,7 +359,7 @@ const ALL_MODELS = [
         category: 'vision',
         icon: 'G',
         context: '8K',
-        description: 'Text, code, and vision. Google's versatile open model.',
+        description: "Text, code, and vision. Google's versatile open model.",
         runs: '877K'
     },
     {
@@ -381,7 +381,7 @@ const ALL_MODELS = [
         category: 'vision',
         icon: 'P',
         context: '16K',
-        description: 'Image and audio understanding. Microsoft's latest multimodal.',
+        description: "Image and audio understanding. Microsoft's latest multimodal.",
         runs: '454K'
     },
     {
