@@ -843,21 +843,67 @@ const ALL_MODELS = [
 // WAIT FOR DOM TO LOAD
 // ================================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all components
-    initLoader();
-    initThreeJS();
-    initParticles();
-    initScrollAnimations();
-    initNavbar();
-    initTiltEffect();
-    initCustomCursor();
-    initModelTabs();
-    initModelsGrid();
-    initStatsCounter();
-    initThemeToggle();
-    initMobileMenu();
-    initDemoChat();
-    initToast();
+    try {
+        initLoader();
+    } catch(e) { console.error('Loader error:', e); }
+    
+    try {
+        initThreeJS();
+    } catch(e) { console.error('ThreeJS error:', e); }
+    
+    try {
+        initParticles();
+    } catch(e) { console.error('Particles error:', e); }
+    
+    try {
+        initScrollAnimations();
+    } catch(e) { console.error('Scroll error:', e); }
+    
+    try {
+        initNavbar();
+    } catch(e) { console.error('Navbar error:', e); }
+    
+    try {
+        initTiltEffect();
+    } catch(e) { console.error('Tilt error:', e); }
+    
+    try {
+        initCustomCursor();
+    } catch(e) { console.error('Cursor error:', e); }
+    
+    try {
+        initModelTabs();
+    } catch(e) { console.error('ModelTabs error:', e); }
+    
+    try {
+        initModelsGrid();
+    } catch(e) { console.error('ModelsGrid error:', e); }
+    
+    try {
+        initStatsCounter();
+    } catch(e) { console.error('Stats error:', e); }
+    
+    try {
+        initThemeToggle();
+    } catch(e) { console.error('Theme error:', e); }
+    
+    try {
+        initMobileMenu();
+    } catch(e) { console.error('MobileMenu error:', e); }
+    
+    try {
+        initDemoChat();
+    } catch(e) { console.error('DemoChat error:', e); }
+    
+    try {
+        initToast();
+    } catch(e) { console.error('Toast error:', e); }
+    
+    // Fallback: Force hide loader after 3 seconds
+    setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if (loader) loader.classList.add('hidden');
+    }, 3000);
     
     console.log('🚀 Saurabh AI v2.0 initialized!');
 });
