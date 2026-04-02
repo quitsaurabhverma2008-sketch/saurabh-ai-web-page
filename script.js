@@ -1409,6 +1409,7 @@ const API_BASE = 'https://saurabh-ai.onrender.com';
 function initDemoChat() {
     const demoInput = document.getElementById('demoInput');
     const sendBtn = document.getElementById('sendBtn');
+    const modelSelect = document.getElementById('demoModel');
     
     if (!demoInput || !sendBtn) return;
     
@@ -1416,6 +1417,32 @@ function initDemoChat() {
     demoInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') sendMessage();
     });
+    
+    if (modelSelect) {
+        modelSelect.addEventListener('change', function() {
+            updateModelIndicator(this.value);
+        });
+        updateModelIndicator(modelSelect.value);
+    }
+}
+
+function updateModelIndicator(modelId) {
+    const indicator = document.getElementById('selectedModelIndicator');
+    if (!indicator) return;
+    
+    const modelNames = {
+        'llama-3.3-70b-versatile': 'Sage (L3.3 70B)',
+        'qwen/qwen3-32b': 'Poly (Qwen3 32B)',
+        'meta-llama/llama-3.1-8b-instant': 'Quick (L3.1 8B)',
+        'moonshotai/kimi-k2-instruct': 'Kimi K2',
+        'moonshotai/kimi-k2-instruct-0905': 'Kimi K2 Long',
+        'openai/gpt-oss-120b': 'GPT-OSS 120B',
+        'meta-llama/llama-4-scout-17b-16e-instruct': 'Scout (Llama4)',
+        'groq/compound': 'Compound'
+    };
+    
+    indicator.textContent = modelNames[modelId] || 'Auto Best';
+    indicator.dataset.model = modelId;
 }
 
 function sendMessage() {
@@ -1452,6 +1479,8 @@ function addUserMessage(message) {
 
 function addBotMessage(content) {
     const chat = document.getElementById('demoChat');
+    const modelIndicator = document.getElementById('selectedModelIndicator');
+    const currentModel = modelIndicator ? modelIndicator.textContent : 'Auto Best';
     const msg = document.createElement('div');
     msg.className = 'chat-message bot';
     msg.innerHTML = `
@@ -1463,6 +1492,7 @@ function addBotMessage(content) {
             </svg>
         </div>
         <div class="message-content">
+            <span class="model-badge">${currentModel}</span>
             <p class="bot-text"></p>
             <span class="time">Just now</span>
         </div>

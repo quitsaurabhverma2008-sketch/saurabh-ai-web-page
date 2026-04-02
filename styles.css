@@ -2163,6 +2163,24 @@ body.dark .moon-icon {
     }
 }
 
+.demo-model-select {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.demo-model-select .model-indicator {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    min-width: 90px;
+    text-align: center;
+}
+
 .demo-model-select select {
     padding: 0.5rem 1rem;
     background: var(--dark-lighter);
@@ -2183,6 +2201,17 @@ body.dark .moon-icon {
     min-height: 400px;
     max-height: 500px;
     overflow-y: auto;
+}
+
+.chat-message .model-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
 }
 
 .chat-message {
